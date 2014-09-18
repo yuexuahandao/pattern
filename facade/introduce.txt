@@ -1,0 +1,1 @@
+Use classes in different packages to form a litile system for the clent to use.And this class will be used to as a common interface of those packages.

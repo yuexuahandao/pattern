@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="adapter" default="run" basedir=".">
+	<property name="src" value="." />
+	<property name="dest" value="bin" />
+	<property name="jar_name" value="adapter.jar"/>
+
+	<target name="init">
+		<echo message="initial bin folder" />
+		<mkdir dir="${dest}"/>
+		<echo message="initial bin successfully"/>
+	</target>
+
+	<target name="clean">
+		<echo message="clean the classes" />
+		<delete dir="${dest}"/>
+		<echo message="clean the classes finished"/>
+	</target>
+
+	<target name="compile" depends="init">
+		<echo message="compile the source code"/>
+		<javac srcdir="${src}" destdir="${dest}"/>
+		<echo message="compile finished"/>
+	</target>
+
+	<target name="jar" depends="compile">
+		<echo message="build jar package"/>
+		<jar jarfile="${jar_name}" basedir="${dest}">
+			<manifest>
+				<attribute name="Main-Class" value="Client"/>
+			</manifest>
+		</jar>
+		<echo message="build jar finished"/>
+	</target>
+
+	<target name="run" depends="jar">
+		<java jar="${jar_name}" fork="true"/>
+	</target>
+</project>
