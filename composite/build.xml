@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="composite" default="run" basedir=".">
+	<property name="src" value="."/>
+	<property name="dest" value="bin"/>
+	<property name="jar_name" value="composite.jar"/>
+
+	<target name="init">
+		<echo message="initial folder bin"/>
+		<mkdir dir="${dest}"/>
+		<echo message="initial folder bin finished"/>
+	</target>
+
+	<target name="clean">
+		<echo message="clean the classes"/>
+		<delete dir="${dest}"/>
+		<echo message="clean the classes finished"/>
+	</target>
+
+	<target name="compile" depends="init">
+		<echo message="compile the source code"/>
+		<javac srcdir="${src}" destdir="${dest}"/>
+		<echo message="compile the source code finished"/>
+	</target>
+
+	<target name="jar" depends="compile">
+		<echo message="package the classes"/>
+		<jar jarfile="${jar_name}" basedir="${dest}">
+			<manifest>
+				<attribute name="Main-Class" value="Test" />
+			</manifest>
+		</jar>
+		<echo message="package the classes finished"/>
+	</target>
+
+	<target name="run" depends="jar">
+		<echo message="run this project"/>
+		<java jar="${jar_name}" fork="true"/>
+	</target>
+</project>
